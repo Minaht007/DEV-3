@@ -1,0 +1,26 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;   
+    width: 400px;
+    padding-top: 40px;    
+}
+.input {
+    padding: 10px 0 10px 15px;
+    border-radius: 4px;
+    background-color: aliceblue;
+    color: brown;
+}
+.btm {
+    margin: 20px 0;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+.btm:hover {
+    background-color: aliceblue;
+}
