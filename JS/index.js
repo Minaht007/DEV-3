@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (dragging) {
             movable.style.left = event.clientX - offset.x + "px";
             movable.style.top = event.clientY - offset.y + "px";
+            
         }
     });
 
