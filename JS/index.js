@@ -1,65 +1,59 @@
+const input = document.querySelector(".input");
+const btm = document.querySelector(".btm");
+const textarea = document.querySelector(".textarea");
+const p = document.querySelector(".p");
+const transfer = document.querySelector(".transfer");
 
-const input = document.querySelector(".input")
-const btm = document.querySelector(".btm")
-const textarea = document.querySelector(".textarea")
-const p = document.querySelector(".p")
-const transfer = document.querySelector(".transfer")
-
-function text(e) {    
-    e.preventDefault();
-    const textInput = input.value
-    textarea.value = textInput 
-    p.textContent = textInput   
+function text(e) {
+  e.preventDefault();
+  const textInput = input.value;
+  textarea.value = textInput;
+  p.textContent = textInput;
 }
 
-btm.addEventListener("click", text)
+btm.addEventListener("click", text);
 
 // part two
 
 document.addEventListener("DOMContentLoaded", function () {
-    const movable = document.querySelector(".move"); 
-    let dragging = false;
-    let offset = { x: 0, y: 0 };
+  const movable = document.querySelector(".move");
+  let dragging = false;
+  let offset = { x: 0, y: 0 };
 
-    movable.addEventListener("mousedown", function (event) {
-        dragging = true;
-        const rect = movable.getBoundingClientRect();
-        offset = {
-            x: event.clientX - rect.left,
-            y: event.clientY - rect.top,
-        };
-    });
+  movable.addEventListener("mousedown", function (event) {
+    dragging = true;
+    const rect = movable.getBoundingClientRect();
+    offset = {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+    };
 
-    document.addEventListener("mousemove", function (event) { 
-        if (dragging) {
-            movable.style.left = event.clientX - offset.x + "px";
-            movable.style.top = event.clientY - offset.y + "px";
-            
-        }
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    movable.childNodes.forEach((symbol) => {
+      const symbolRect = symbol.getBoundingClientRect();
+      if (
+        x >= symbolRect.left &&
+        x <= symbolRect.right &&
+        y >= symbolRect.top &&
+        y <= symbolRect.bottom
+      ) {
+        symbol.style.backgroundColor = transfer;
+      }
     });
+  });
 
-    document.addEventListener("mouseup", function () {
-        dragging = false;
-    });
+  document.addEventListener("mousemove", function (event) {
+    if (dragging) {
+      movable.style.left = event.clientX - offset.x + "px";
+      movable.style.top = event.clientY - offset.y + "px";
+    }
+  });
+
+  document.addEventListener("mouseup", function () {
+    dragging = false;
+  });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // let textTransfer = false;
 
@@ -67,7 +61,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // let endX
 // let startY
 // let endY
-
 
 // p.addEventListener('mousedown', function(e) {
 //     textTransfer = true
@@ -92,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //     textTransfer = false
 // })
 
-// function symbolSelected(x, y) {   
+// function symbolSelected(x, y) {
 //     const rect = p.getBoundingClientRect();
 //     const selectedSymbols = [];
 
@@ -108,18 +101,18 @@ document.addEventListener("DOMContentLoaded", function () {
 //     });
 // }
 
-// function lettersTransfer() {  
+// function lettersTransfer() {
 
 //     const rect = p.getBoundingClientRect();
 //     const deltaX = endX - startX;
 //     const deltaY = endY - startY;
-    
+
 //     p.querySelectorAll('.p').forEach(symbol => {
 //         const bounds = symbol.getBoundingClientRect();
 //         const symbolX = bounds.left - rect.left + deltaX;
 //         const symbolY = bounds.top - rect.top + deltaY;
 //         symbol.style.left = symbolX + 'px';
 //         symbol.style.top = symbolY + 'px';
-//         symbol.classList.remove('transfer'); 
+//         symbol.classList.remove('transfer');
 //     });
 // }
